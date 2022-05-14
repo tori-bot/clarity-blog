@@ -1,0 +1,26 @@
+<ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Welcome</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Quotes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Register</a>
+    </li>
+
+    {% if current_user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+       {% else %}
+       <li class="nav-item">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+  </ul>

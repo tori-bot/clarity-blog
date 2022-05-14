@@ -5,4 +5,4 @@ from . import main
 @main.route('/')
 def index():
     title='Clarity Blogs'
-    return render('index.html',title=title)
+    return render_template('index.html',title=title)
