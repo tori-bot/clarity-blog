@@ -63,7 +63,7 @@ class Blog(db.Model):
     category=db.Column(db.String(255))
     author=db.Column(db.String(255))
     content=db.Column(db.Text())
-    published=db.Column(db.DateTime,default=datetime.datetime.utcnow)
+    published=db.Column(db.DateTime,default=datetime.utcnow)
     author_id=db.Column(db.Integer(),db.ForeignKey('author.id'))
 
     def save_blog(self):
