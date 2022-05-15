@@ -9,6 +9,15 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class Role(db.Model):
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+
+    def __repr__(self):
+        return f'User {self.name}'
+
 class User(UserMixin,db.Model):
     #model to create new users
     __tablename__='users'
@@ -19,6 +28,8 @@ class User(UserMixin,db.Model):
     pass_secure=db.Column(db.String(255))
     bio=db.Column(db.String(255))
     profile_pic_url=db.Column(db.String())
+    role_id=db.Column(db.Integer, db.ForeignKey('roles.id'))
+    comments=db.relationship('Comment',backref='user',lazy='dynamic')
     
     
 
@@ -62,7 +73,7 @@ class Blog(db.Model):
     author=db.Column(db.String(255))
     content=db.Column(db.Text())
     published=db.Column(db.DateTime,default=datetime.utcnow)
-    author_id=db.Column(db.Integer(),db.ForeignKey('author.id'))
+    author_id=db.Column(db.Integer,db.ForeignKey('author.id'))
 
     def save_blog(self):
         db.session.add(self)
@@ -80,7 +91,7 @@ class Comment(db.Model):
     __tablename__='comments'
 
     id=db.Column(db.Integer,primary_key=True)
-    pitch_id_comment=db.Column(db.Integer,db.ForeignKey('pitches.id',ondelete='CASCADE'))
+    blog_id_comment=db.Column(db.Integer,db.ForeignKey('blog.id',ondelete='CASCADE'))
     content=db.Column(db.Text)
     posted=db.Column(db.DateTime,default=datetime.utcnow)
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
@@ -91,12 +102,12 @@ class Comment(db.Model):
 
     @classmethod
     def add_comment(cls,id):
-        comment = Comment(user = current_user, pitch_id=id)
+        comment = Comment(user = current_user, blog_id=id)
         comment.save_comment()
 
     @classmethod
     def get_comment(cls,id):
-        comments=Comment.query.filter_by(pitch_id=id).all()
+        comments=Comment.query.filter_by(blog_id=id).all()
         return comments
 
     def __repr__(self):
