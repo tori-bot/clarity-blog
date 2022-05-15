@@ -16,6 +16,5 @@ class CommentForm(FlaskForm):
 class BlogForm(FlaskForm):
     title= StringField('Blog title',validators=[DataRequired()] )
     category=SelectField('Which category',options=[('technology','technology'),('politics','politics'),('entertainment','entertainment '),('personal','personal ')],validators=[Optional()])
-    author=StringField('Your pen name',validators=[DataRequired()])
     content=TextAreaField('Get creative',validators=[DataRequired()])
     submit=SubmitField('Submit')

@@ -44,8 +44,6 @@ class Author(UserMixin,db.Model):
     username=db.Column(db.String(255 ))
     email=db.Column(db.String(255))
     author_pass=db.Column(db.String(255))
-    title=db.Column(db.String(255)
-    )
     blog=db.relationship('Blog',backref='author',lazy='dynamic')
 
     def save_author(self):
@@ -77,3 +75,29 @@ class Blog(db.Model):
 
     def __repr__(self):
         return(f"{self.author}'s Blogs" )
+
+class Comment(db.Model):
+    __tablename__='comments'
+
+    id=db.Column(db.Integer,primary_key=True)
+    pitch_id_comment=db.Column(db.Integer,db.ForeignKey('pitches.id',ondelete='CASCADE'))
+    content=db.Column(db.Text)
+    posted=db.Column(db.DateTime,default=datetime.utcnow)
+    user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def add_comment(cls,id):
+        comment = Comment(user = current_user, pitch_id=id)
+        comment.save_comment()
+
+    @classmethod
+    def get_comment(cls,id):
+        comments=Comment.query.filter_by(pitch_id=id).all()
+        return comments
+
+    def __repr__(self):
+        return(f"User('{self.content}', '{self.posted}')")
