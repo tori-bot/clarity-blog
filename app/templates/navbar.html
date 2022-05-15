@@ -1,27 +1,27 @@
-<ul class="nav nav-pills nav-fill">
+<ul class="nav nav-pills">
     <li class="nav-item">
-      <a class="nav-link active" href="#">Welcome</a>
+      <a class="nav-link btn" role="pill" href="/welcome">Welcome</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Quotes</a>
+      <a class="nav-link btn" role="pill" href="#">Quotes</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Register</a>
+      <a class="nav-link btn "  role="pill"   href="{{url_for('auth.register')}} " >Register</a>
     </li>
 
     {% if current_user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="#">Home</a>
+      <a class="nav-link btn" role="pill" href="/">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
+        <a class="nav-link btn" role="pill" href="#">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link btn" role="pill" href="{{url_for('auth.logout')}} ">Logout</a>
       </li>
        {% else %}
        <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link btn" role="pill"  href="{{url_for('auth.login') }}">Login</a>
       </li>
       {% endif %}
   </ul>
