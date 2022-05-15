@@ -5,7 +5,7 @@ from . import main
 from ..  import db,photos
 from flask_login import current_user,login_required
 from ..models import User,Author,Blog
-from .forms import UpdateAdminProfile,UpdateProfile
+from .forms import UpdateAdminProfile,UpdateProfile,BlogForm
 
 @main.route('/')
 def welcome():
@@ -92,3 +92,29 @@ def update_pic(uname):
         db.session.commit()
 
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/blog/new',methods=['GET','POST'])
+@login_required
+def new_pitch():
+    title='New Blog'
+    author=Author.query.filter_by(id=current_user.id).first()
+
+    if author is None:
+        abort(404) 
+
+    blog_form=BlogForm()
+    if blog_form.validate_on_submit():
+        title=blog_form.title.data
+        category=blog_form.category.data
+        content=blog_form.content.data
+
+        new_blog=Blog(title=title,category=category, author=author, content=content)
+
+        new_blog.save_blog()
+        
+        return redirect(url_for('main.index'))
+    else:
+        blogs=Blog.query.order_by(Blog.published).all
+        
+
+    return render_template('new_blog.html',title=title,blog_form=blog_form,blogs=blogs)
