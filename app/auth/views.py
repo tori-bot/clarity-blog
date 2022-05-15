@@ -15,7 +15,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message(" Welcome to Pitch It.","email/welcome_user",user.email,user=user)
+        mail_message(" Welcome to Clarity Blog.","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
         
@@ -23,7 +23,7 @@ def register():
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
-    title='Pitch-it Login'
+    title='Clarity Blog Login'
 
     login_form=LoginForm()
 
