@@ -40,7 +40,7 @@ class AuthorRegisterForm(FlaskForm):
         if Author.query.filter_by(username = data_field.data).first():
             raise ValidationError('That pen name is already is taken')
 
-class LoginForm(FlaskForm):
+class AuthorLoginForm(FlaskForm):
     email = StringField('Your Email Address',validators=[DataRequired(),Email()])
     password = PasswordField('Password',validators =[DataRequired()])
     remember = BooleanField('Stay logged in')
