@@ -1,4 +1,4 @@
-Hello {{user.username}}!
+Hello friend!
 Welcome to Clarity Blog.
 
 You have successfully registered with us and we are excited that you have joined our community.

@@ -27,8 +27,8 @@ class LoginForm(FlaskForm):
 
 class AuthorRegisterForm(FlaskForm):
     username= StringField('Enter username')
-    email= StringField('')
-    author_pass = PasswordField('Password',validators = [DataRequired(), EqualTo('password_confirm',message = 'Passwords must match')])
+    email= StringField('Your email')
+    password = PasswordField('Password',validators = [DataRequired(), EqualTo('password_confirm',message = 'Passwords must match')])
     password_confirm = PasswordField('Confirm Passwords',validators = [DataRequired()])
     submit=SubmitField('Register Author ')
 

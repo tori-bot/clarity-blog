@@ -71,7 +71,7 @@ def adminlogin():
 
         if author is not None and author.verify_password(author_login_form.password.data):
             login_user(author,author_login_form.remember.data)
-            return redirect(request.args.get('next') or url_for('main.adminprofile'))
+            return redirect(request.args.get('next') or url_for('main.adminprofile',uname=author.username))
 
         flash('Invalid username or Password')
 
