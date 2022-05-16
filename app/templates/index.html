@@ -2,20 +2,31 @@
 
 {% block content %}
 <div class="jumbotron jumbotron-fluid" style="height: 100vh;background-image:url(https://images.unsplash.com/photo-1517148892120-4d2da39c8dc1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGJvb2tzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60) ;background-repeat: no-repeat;background-size: cover;color: #fdfcdc;">
-    <div class="container" style="text-align: center;" >
+
+    <div class="container" style="text-align: center;background: transparent;" >
       <h1 class="display-4">CLARITY BLOG</h1>
       
       <h1>Welcome {{user.username}}. </h1>
-      <p class="lead">This is a safe space for me to express myself. I share my deepest beliefs and philosophies about life and everything within it.</p>
+      <p class="lead">This is a safe space for me to express myself.<br> I share my deepest beliefs and philosophies about life and everything within it.</p>
         <p class="lead">Feel free to leave a comment, but be respectful about it. We are all on a progressive learning path.</p>
 
-      
-
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="card" style="background: transparent;
+          margin-top: 6vh; border: solid #fdfcdc 2px;border-radius: 5px;padding:5vh 3vw" >
         <h3>{{quotes.quote}} </h3>
-        <h5>{{quotes.author}} </h5>
+        <h5>~{{quotes.author}} </h5>
+        
+      </div>
+      <div class="col-md-3"></div>
+        </div>
+      </div>
+      
         
 
-    </div>
+    
   </div>
 
 <div class="container-fluid" style="color: #b76d68;background-color: #121420; width: 100vw;margin-top: -5vh;">
@@ -134,6 +145,21 @@
 
 
 {% endif %}
+
+<div class="contacts">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-title">
+          <h2>Subscribe to our Newsletter</h2>
+        </div>
+        <div class="card-body">
+          {{wtf.quick_form(subscribe)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
