@@ -21,7 +21,7 @@ def adminprofile(uname):
 
     return render_template('/profile/admin_profile.html',author=author)
 
-@main.route('/user/<uname>/update',methods=['GET','POST'])
+@main.route('/author/<uname>/update',methods=['GET','POST'])
 def update_admin_profile(uname):
     author=Author.query.filter_by(username=uname).first()
 
@@ -39,7 +39,7 @@ def update_admin_profile(uname):
         return redirect(url_for('.adminprofile',uname=author.username))
     return render_template('profile/admin_update.html',author_update_form=author_update_form)
 
-@main.route('/user/<uname>/update/pic',methods=['POST'])
+@main.route('/author/<uname>/update/pic',methods=['POST'])
 @login_required
 def update_admin_pic(uname):
     author= Author.query.filter_by(username = uname).first()
@@ -95,7 +95,7 @@ def update_pic(uname):
 
 @main.route('/blog/new',methods=['GET','POST'])
 @login_required
-def new_pitch():
+def new_blog():
     title='New Blog'
     author=Author.query.filter_by(id=current_user.id).first()
 
@@ -112,9 +112,17 @@ def new_pitch():
 
         new_blog.save_blog()
         
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.adminprofile',uname=author.username))
     else:
         blogs=Blog.query.order_by(Blog.published).all
         
 
     return render_template('new_blog.html',title=title,blog_form=blog_form,blogs=blogs)
+
+@main.route('/author/<uname>/blogs >')
+def blogs(uname):
+    author=Author.query.filter_by(username=uname)
+    blogs=Blog.query.all()
+    if blogs is None:
+        return redirect(url_for('main.adminprofile ',uname=author.username))
+    return render_template('admin_profile.html',author=author,blogs=blogs)
