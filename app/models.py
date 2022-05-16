@@ -54,7 +54,7 @@ class Author(UserMixin,db.Model):
     id=db.Column(db.Integer, primary_key=True)
     username=db.Column(db.String(255 ))
     bio=db.Column(db.String(255))
-    profile_pic_url=db.Column(db.String())
+    profile_url=db.Column(db.String())
     email=db.Column(db.String(255))
     author_pass=db.Column(db.String(255))
     blog=db.relationship('Blog',backref='authors',lazy='dynamic')
@@ -85,8 +85,8 @@ class Blog(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     title=db.Column(db.String(255))
     category=db.Column(db.String(255))
-    author=db.Column(db.String(255))
-    content=db.Column(db.Text())
+    pename=db.Column(db.String(255))
+    content=db.Column(db.Text)
     published=db.Column(db.DateTime,default=datetime.utcnow)
     author_id=db.Column(db.Integer,db.ForeignKey('author.id'))
 
@@ -100,7 +100,7 @@ class Blog(db.Model):
         return blogs
 
     def __repr__(self):
-        return(f"{self.author}'s Blogs" )
+        return(f"{self.pename}'s Blogs" )
 
 class Comment(db.Model):
     __tablename__='comments'

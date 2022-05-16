@@ -1,6 +1,6 @@
 from urllib import request
 from django.shortcuts import render
-from flask import render_template,redirect,url_for,abort
+from flask import render_template,redirect,url_for,abort,request 
 from . import main
 from ..  import db,photos
 from flask_login import current_user,login_required
@@ -47,10 +47,10 @@ def update_admin_pic(uname):
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
-        author.profile_pic_url = path
+        author.profile_url = path
         db.session.commit()
 
-    return redirect(url_for('main.adminprofile',uname=uname))
+    return redirect(url_for('.adminprofile',uname=author.username))
   
 
 @main.route('/user/<uname>')
@@ -107,8 +107,9 @@ def new_blog():
         title=blog_form.title.data
         category=blog_form.category.data
         content=blog_form.content.data
+        pename=author.username
 
-        new_blog=Blog(title=title,category=category, author=author, content=content)
+        new_blog=Blog(title=title,category=category,pename=pename ,content=content,)
 
         new_blog.save_blog()
         
@@ -119,7 +120,7 @@ def new_blog():
 
     return render_template('new_blog.html',title=title,blog_form=blog_form,blogs=blogs)
 
-@main.route('/author/<uname>/blogs >')
+@main.route('/blogs >')
 def blogs(uname):
     author=Author.query.filter_by(username=uname)
     blogs=Blog.query.all()
