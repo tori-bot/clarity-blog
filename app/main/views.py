@@ -4,8 +4,9 @@ from flask import render_template,redirect,url_for,abort,request
 from . import main
 from ..  import db,photos
 from flask_login import current_user,login_required
-from ..models import User,Author,Blog
+from ..models import User,Author,Blog,Quotes
 from .forms import UpdateAdminProfile,UpdateProfile,BlogForm
+from ..requests import get_quotes
 
 @main.route('/')
 def welcome():
@@ -133,8 +134,12 @@ def blogs(uname):
 @login_required
 def index():
     title='Clarity Blog'
+
+    quotes=get_quotes()
+
     blogs=Blog.query.order_by(Blog.published).all()
     user=User.query.filter_by(id=current_user.id).first()
+
     if user is None:
         abort(404)
 
@@ -143,4 +148,4 @@ def index():
     entertainment=Blog.query.filter_by(category='entertainment').all()
     personal=Blog.query.filter_by(category='personal').all()
 
-    return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user )
+    return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user,quotes=quotes )

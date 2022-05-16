@@ -129,7 +129,7 @@ class Comment(db.Model):
         return(f"User('{self.content}', '{self.posted}')")
 
 class Quotes:
-    def __init__(self,id,author,quote):
-        self.id=id
+    def __init__(self,index,author,quote):
+        self.index=index
         self.author=author
         self.quote=quote
