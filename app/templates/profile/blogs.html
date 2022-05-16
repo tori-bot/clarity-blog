@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>My Blogs</h1>
+{% if blogs %}
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for item in blogs %}
+                <div class="card" style="margin-top:5vh;">
+                  <div class="card-body">
+                      <div class="card-title">
+                        <h2>{{item.title}}</h2>  
+                      </div>
+                      <div class="card-text text-muted">
+                        <h4>{{item.category}} </h4></div>
+                        <div class="card-text">
+                        <h3>Author: {{item.pename}} </h3>
+                        <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
+                        <h5>{{item.content}} </h5>
+
+                      </div>
+                      
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endif %}
+
+
+
+
+{% endblock %}

@@ -40,7 +40,7 @@
       <a href="{{url_for('main.new_blog',blog_id=current_user.id)}} " class="btn" style="color:white;background-color: rgb(131, 29, 114); border: solid black 2px;border-radius: 5px ;height: 7vh;width: 13vw;font-size: large;margin-left: 20vw;margin-top: 5vh; ">Add New blog</a>
     </div>
     <div class="col-md-6">
-      <a href="{{url_for('main.blogs',uname=author.username)}} " class="btn" style="color:white;background-color: rgb(48, 77, 209); border: solid black 2px;border-radius: 5px ;height: 7vh;width: 13vw;font-size: large;margin-left: 10vw;margin-top: 5vh; ">My blogs</a>
+      <a href="{{url_for('main.blogs',uname=current_user.username)}} " class="btn" style="color:white;background-color: rgb(48, 77, 209); border: solid black 2px;border-radius: 5px ;height: 7vh;width: 13vw;font-size: large;margin-left: 10vw;margin-top: 5vh; ">My blogs</a>
     </div>
     
 </div>

@@ -1,5 +1,134 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>WELCOME LADYBUGS!</h1>
+<div class="jumbotron jumbotron-fluid" style="height: 100vh;background-image:url(https://images.unsplash.com/photo-1517148892120-4d2da39c8dc1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGJvb2tzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60) ;background-repeat: no-repeat;background-size: cover;color: #fdfcdc;">
+    <div class="container" style="text-align: center;" >
+      <h1 class="display-4">CLARITY BLOG</h1>
+      
+      <h1>Welcome {{user.username}}. </h1>
+      <p class="lead">This is a safe space for me to express myself. I share my deepest beliefs and philosophies about life and everything within it.</p>
+        <p class="lead">Feel free to leave a comment, but be respectful about it. We are all on a progressive learning path.</p>
+
+    </div>
+  </div>
+
+<div class="container-fluid" style="color: #b76d68;background-color: #121420; width: 100vw;margin-top: -5vh;">
+{% if technology %}
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for item in technology %}
+                <div class="card" style="margin-top:5vh;">
+                  <div class="card-body">
+                      <div class="card-title">
+                        <h2>{{item.title}}</h2>  
+                      </div>
+                      <div class="card-text text-muted">
+                        <h4>{{item.category}} </h4></div>
+                        <div class="card-text">
+                        <h3>Author: {{item.pename}} </h3>
+                        <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
+                        <h5>{{item.content}} </h5>
+
+                      </div>
+                      
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endif %}
+
+{% if politics %}
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for item in politics %}
+                <div class="card" style="margin-top:5vh;">
+                  <div class="card-body">
+                      <div class="card-title">
+                        <h2>{{item.title}}</h2>  
+                      </div>
+                      <div class="card-text text-muted">
+                        <h4>{{item.category}} </h4></div>
+                        <div class="card-text">
+                        <h3>Author: {{item.pename}} </h3>
+                        <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
+                        <h5>{{item.content}} </h5>
+
+                      </div>
+                      
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endif %}
+
+{% if entertainment %}
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for item in entertainment  %}
+                <div class="card" style="margin-top:5vh;">
+                  <div class="card-body">
+                      <div class="card-title">
+                        <h2>{{item.title}}</h2>  
+                      </div>
+                      <div class="card-text text-muted">
+                        <h4>{{item.category}} </h4></div>
+                        <div class="card-text">
+                        <h3>Author: {{item.pename}} </h3>
+                        <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
+                        <h5>{{item.content}} </h5>
+
+                      </div>
+                      
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endif %}
+  
+{% if personal %}
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for item in personal %}
+                <div class="card" style="margin-top:5vh;">
+                  <div class="card-body">
+                      <div class="card-title">
+                        <h2>{{item.title}}</h2>  
+                      </div>
+                      <div class="card-text text-muted">
+                        <h4>{{item.category}} </h4></div>
+                        <div class="card-text">
+                        <h3>Author: {{item.pename}} </h3>
+                        <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
+                        <h5>{{item.content}} </h5>
+
+                      </div>
+                      
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endif %}
+
+</div>
+
 {% endblock %}

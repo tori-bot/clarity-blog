@@ -115,15 +115,32 @@ def new_blog():
         
         return redirect(url_for('main.adminprofile',uname=author.username))
     else:
-        blogs=Blog.query.order_by(Blog.published).all
+        blogs=Blog.query.order_by(Blog.published).all()
         
 
     return render_template('new_blog.html',title=title,blog_form=blog_form,blogs=blogs)
 
-@main.route('/blogs >')
+@main.route('/author/<uname>/blog')
 def blogs(uname):
     author=Author.query.filter_by(username=uname)
-    blogs=Blog.query.all()
+    blogs=Blog.query.order_by(Blog.published).all()
     if blogs is None:
         return redirect(url_for('main.adminprofile ',uname=author.username))
-    return render_template('admin_profile.html',author=author,blogs=blogs)
+    return render_template('profile/blogs.html',author=author,blogs=blogs)
+
+#READER SIDE
+@main.route('/home')
+@login_required
+def index():
+    title='Clarity Blog'
+    blogs=Blog.query.order_by(Blog.published).all()
+    user=User.query.filter_by(id=current_user.id).first()
+    if user is None:
+        abort(404)
+
+    technology=Blog.query.filter_by(category='technology').all()
+    politics=Blog.query.filter_by(category='politics').all()
+    entertainment=Blog.query.filter_by(category='entertainment').all()
+    personal=Blog.query.filter_by(category='personal').all()
+
+    return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user )

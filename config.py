@@ -12,6 +12,8 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
+    API_URL=os.environ.get('API_URL')
+
 class ProdConfig(Config):
     pass
 
