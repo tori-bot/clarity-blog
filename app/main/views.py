@@ -5,7 +5,7 @@ from . import main
 from ..  import db,photos
 from flask_login import current_user,login_required
 from ..models import User,Author,Blog,Quotes
-from .forms import UpdateAdminProfile,UpdateProfile,BlogForm
+from .forms import SubscribeForm, UpdateAdminProfile,UpdateProfile,BlogForm
 from ..requests import get_quotes
 
 @main.route('/')
@@ -136,6 +136,7 @@ def index():
     title='Clarity Blog'
 
     quotes=get_quotes()
+    subscribe=SubscribeForm()
 
     blogs=Blog.query.order_by(Blog.published).all()
     user=User.query.filter_by(id=current_user.id).first()
@@ -148,4 +149,4 @@ def index():
     entertainment=Blog.query.filter_by(category='entertainment').all()
     personal=Blog.query.filter_by(category='personal').all()
 
-    return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user,quotes=quotes )
+    return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user,quotes=quotes,subscribe=subscribe )
