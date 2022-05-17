@@ -47,6 +47,8 @@
                         <h3>Author: {{item.pename}} </h3>
                         <p class="card-text"><small class="text-muted">Published: {{item.published}}</small></p>
                         <h5>{{item.content}} </h5>
+                        <a href="{{url_for('main.new_comment',blog_id_comment=item.id)}} "><button><i class="fa fa-comment" aria-hidden="true"></i></button></a>
+                        
 
                       </div>
                       

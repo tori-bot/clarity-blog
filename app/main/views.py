@@ -4,8 +4,8 @@ from flask import render_template,redirect,url_for,abort,request
 from . import main
 from ..  import db,photos
 from flask_login import current_user,login_required
-from ..models import User,Author,Blog,Quotes
-from .forms import SubscribeForm, UpdateAdminProfile,UpdateProfile,BlogForm
+from ..models import User,Author,Blog,Quotes,Comment
+from .forms import SubscribeForm, UpdateAdminProfile,UpdateProfile,BlogForm,CommentForm
 from ..requests import get_quotes
 
 @main.route('/')
@@ -150,3 +150,26 @@ def index():
     personal=Blog.query.filter_by(category='personal').all()
 
     return render_template('index.html',blogs=blogs,technology=technology,politics=politics, entertainment=entertainment, personal=personal,title=title,user=user,quotes=quotes,subscribe=subscribe )
+
+
+@main.route('/pitch/<int:blog_id_comment>/new_comment',methods=['GET','POST'])
+@login_required
+def new_comment(blog_id_comment):
+    
+    comment_form=CommentForm()
+    
+    blog=Blog.query.get(blog_id_comment)
+   
+    all_comments=Comment.query.filter_by(blog_id_comment=blog_id_comment).all()
+    title=f'{blog.title} '
+    if comment_form.validate_on_submit():
+        comment=comment_form.comment.data
+
+
+        new_comment=Comment(content=comment,user=current_user,blog_id_comment=blog_id_comment)
+
+        new_comment.save_comment()
+
+        return redirect(url_for('main.new_comment',blog_id_comment=blog_id_comment))
+    
+    return render_template('new_comment.html',blog=blog,all_comments=all_comments,title=title,comment_form=comment_form)
