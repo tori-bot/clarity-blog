@@ -54,7 +54,7 @@ def update_admin_pic(uname):
     return redirect(url_for('.adminprofile',uname=author.username))
   
 
-@main.route('/user/<uname>')
+@main.route('/home/user/<uname>')
 def profile(uname):
     user=User.query.filter_by(username=uname).first()
     
@@ -63,7 +63,7 @@ def profile(uname):
 
     return render_template('/profile/profile.html',user=user)
 
-@main.route('/user/<uname>/update',methods=['GET','POST'])
+@main.route('/home/user/<uname>/update',methods=['GET','POST'])
 def update_profile(uname):
     user=User.query.filter_by(username=uname).first()
 
@@ -81,7 +81,7 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
     return render_template('profile/update.html',form=form)
 
-@main.route('/user/<uname>/update/pic',methods=['POST'])
+@main.route('/home/user/<uname>/update/pic',methods=['POST'])
 @login_required
 def update_pic(uname):
     user= User.query.filter_by(username = uname).first()

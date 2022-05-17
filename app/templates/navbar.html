@@ -3,18 +3,19 @@
       <a class="nav-link btn" role="pill" href="/welcome">Welcome</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link btn" role="pill" href="#">Quotes</a>
+      <a class="nav-link btn" role="pill" href="/">Quotes</a>
     </li>
     <li class="nav-item">
       <a class="nav-link btn "  role="pill"   href="{{url_for('auth.register')}} " >Register</a>
     </li>
 
-    {% if current_user.is_authenticated %}
+    {% if current_user.is_authenticated  %}
+      {% if author %}
     <li class="nav-item">
       <a class="nav-link btn" role="pill" href="/">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link btn" role="pill" href="#">Profile</a>
+        <a class="nav-link btn" role="pill" href="{{url_for('main.profile',uname=author.username)}} ">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn" role="pill" href="{{url_for('auth.logout')}} ">Logout</a>
@@ -24,4 +25,20 @@
         <a class="nav-link btn" role="pill"  href="{{url_for('auth.login') }}">Login</a>
       </li>
       {% endif %}
+      {% if user %}
+      <li class="nav-item">
+        <a class="nav-link btn" role="pill" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link btn" role="pill" href="{{url_for('main.profile',uname=user.username)}} ">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn" role="pill" href="{{url_for('auth.logout')}} ">Logout</a>
+        </li>
+         {% else %}
+         <li class="nav-item">
+          <a class="nav-link btn" role="pill"  href="{{url_for('auth.login') }}">Login</a>
+        </li>
+        {% endif %}
+        {% endif %}
   </ul>
