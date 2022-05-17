@@ -7,3 +7,9 @@ body{
     background-color: #121420;
     color: #B76D68;
 }
+
+button{
+    color: aliceblue;
+    border-radius: 5px;
+    border: solid #00afb9 2px;
+}
